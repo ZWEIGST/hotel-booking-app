@@ -6,11 +6,17 @@
   </div>
 </template>
 
-<style lang="scss"> 
+<style lang="scss" scoped> 
+@import '../assets/styles/variables.scss';
 .hotels-section {
+    display: flex;
+    justify-content: center;
     &__heading {
         text-transform: uppercase;
         color: $colorTextHeading;
+        font-family: "Roboto", sans-serif;
+        font-size: $textSizeHeading1;
+        font-weight: medium;
     }
 }
 
