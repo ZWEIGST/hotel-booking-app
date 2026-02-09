@@ -115,6 +115,7 @@ p {
     padding-bottom: 20px;
     margin-top: 9px;
     margin-bottom: 18px;
+    font-family: 'Open Sans';
 
     @include mq('mobile') {
       font-size: 14px;
@@ -166,6 +167,7 @@ p {
   &__currency {
     color: $colorTextValuePrice;
     font-weight: 400;
+    font-family: 'Roboto';
   }
   &__button {
     align-self: center;
