@@ -14,7 +14,6 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/styles/variables.scss';
 .button {
   border: none;
   background-color: $colorButtonPrimary;
@@ -29,6 +28,10 @@ defineProps({
   }
   &:active {
     color: $colorButtonTextActive;
+  }
+
+  @include mq('mobile') {
+    font-size: 14px;
   }
 }
 </style>

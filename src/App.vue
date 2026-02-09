@@ -1,12 +1,10 @@
 <script setup>
-import HotelsPage from './components/HotelsPage.vue'
+import RoomsPage from './components/RoomsPage.vue'
 </script>
 
 <template>
-  <header></header>
-
   <main>
-    <HotelsPage />
+    <RoomsPage />
   </main>
 </template>
 
@@ -18,11 +16,14 @@ import HotelsPage from './components/HotelsPage.vue'
   box-sizing: border-box;
 }
 body {
-  background: linear-gradient(180deg, rgba(222, 237, 255, 0.6) 0%, rgba(166, 204, 250, 0.5) 100%);
+  background-image: url('./assets/img/background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 a {
   text-decoration: none;
-  color:$colorTextLink;
+  color: $colorTextLink;
   &:hover {
     text-decoration: underline;
   }
