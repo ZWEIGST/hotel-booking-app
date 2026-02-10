@@ -66,9 +66,11 @@ const isGuaranteeTagVisible = computed(() => {
     </div>
     <div v-if="isGuaranteeTagVisible" class="card__guarantee-tag"><GuaranteeTag /></div>
     <div class="card__text-content">
-      <h3 class="card__title">
+      <a href="/" class="card__title-link">
+        <h3 class="card__title">
         {{ roomName }}
       </h3>
+      </a>
       <p class="card__decription">
         {{ roomDescription }}
       </p>
@@ -163,6 +165,15 @@ p {
     font-weight: 700;
     font-size: 24px;
     line-height: 32px;
+    &-link {
+      color: $colorTextPrimary;
+      &:hover {
+        text-decoration: underline;
+      }
+      &:active {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
 
     @include mq('mobile') {
       font-size: 20px;
