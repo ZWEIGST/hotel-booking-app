@@ -1,7 +1,9 @@
 <script setup>
+import { computed, ref } from 'vue'
 import Button from './Button.vue'
+import GuaranteeTag from './GuaranteeTag.vue'
 
-defineProps({
+const props = defineProps({
   img: {
     type: String,
     required: true,
@@ -18,13 +20,51 @@ defineProps({
     type: String,
     required: true,
   },
+  hasGuaranteeTag: Boolean,
+})
+
+const isReserved = ref(false)
+const hasMouseLeftAfterReservation = ref(false)
+const isMouseOver = ref(false)
+
+const toggleIsReserved = () => {
+  isReserved.value = !isReserved.value
+}
+const onCardClick = () => {
+  if (isReserved.value) {
+    isReserved.value = false
+    hasMouseLeftAfterReservation.value = false
+  }
+}
+const onMouseLeave = () => {
+  if (isReserved.value) {
+    hasMouseLeftAfterReservation.value = true
+  }
+  isMouseOver.value = false
+}
+const onMouseOver = () => {
+  isMouseOver.value = true
+}
+
+const isReservedLayoutVisible = computed(() => {
+  return isReserved.value && hasMouseLeftAfterReservation.value
+})
+const isGuaranteeTagVisible = computed(() => {
+  return props.hasGuaranteeTag && isMouseOver.value && !isReservedLayoutVisible.value
 })
 </script>
 
 <template>
-  <div class="card">
-    <img class="card__img" :src="img" alt="интерьер отеля" />
+  <div class="card" @click="onCardClick" @mouseleave="onMouseLeave" @mouseover="onMouseOver">
+    <img class="card__img" :src="img" alt="интерьер номера" />
     <div class="card__content-overlay"></div>
+    <div v-if="isReservedLayoutVisible" class="card__reserved-overlay">
+      <div class="card__reserved-text">
+        <p>Номер зарезервирован</p>
+        <p>Перейти к <a>оплате</a></p>
+      </div>
+    </div>
+    <div v-if="isGuaranteeTagVisible" class="card__guarantee-tag"><GuaranteeTag /></div>
     <div class="card__text-content">
       <h3 class="card__title">
         {{ roomName }}
@@ -45,15 +85,13 @@ defineProps({
             </span>
           </p>
         </div>
-        <Button class="card__button" buttonText="Забронировать" />
+        <Button class="card__button" buttonText="Забронировать" :on-click="toggleIsReserved" />
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-h3,
-h4,
 p {
   font-family: 'Open Sans', sans-serif;
 }
@@ -79,6 +117,12 @@ p {
     max-width: 100%;
   }
 
+  &__guarantee-tag {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 3;
+  }
   &__text-content {
     padding: 24px;
     position: relative;
@@ -97,6 +141,23 @@ p {
     height: 100%;
     z-index: 2;
     background: linear-gradient(180deg, rgba(10, 34, 64, 0.1) 0%, #0a2240 100%);
+  }
+  &__reserved-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    background: #ffffff66;
+    display: flex;
+    align-items: flex-end;
+  }
+  &__reserved-text {
+    width: 100%;
+    padding: 26px 25px 32px;
+    background-color: $colorSecondary;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
   }
   &__title {
     font-weight: 700;

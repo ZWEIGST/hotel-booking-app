@@ -4,11 +4,12 @@ defineProps({
     type: String,
     required: true,
   },
+  onClick: Function,
 })
 </script>
 
 <template>
-  <button class="button">
+  <button class="button" @click.stop @click="onClick">
     {{ buttonText }}
   </button>
 </template>

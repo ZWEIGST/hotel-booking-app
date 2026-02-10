@@ -20,6 +20,7 @@ const rooms = [
     name: 'Дуплекс',
     description: 'Просторный двухкомнатный номер с шикарным видом на парк',
     price: '5 700',
+    hasGuaranteeTag: true,
   },
   {
     id: 3,
@@ -42,6 +43,7 @@ const rooms = [
         :img="room.img"
         :room-name="room.name"
         :room-description="room.description"
+        :has-guarantee-tag="room.hasGuaranteeTag"
       />
     </div>
   </div>

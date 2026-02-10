@@ -24,6 +24,7 @@ body {
 a {
   text-decoration: none;
   color: $colorTextLink;
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
